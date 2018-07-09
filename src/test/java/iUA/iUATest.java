@@ -35,6 +35,20 @@ public class iUATest {
         Assert.assertEquals(iUA.UserName, iUA.CheckUser());
     }
 
+    @Test
+    public void Create() {
+        iUA.Login();
+        iUA.Create_Mess();
+        iUA.EnterTo();
+        iUA.EnterText();
+    }
+
+    @Test
+    public void CheckLetter() {
+        iUA.Login();
+        Assert.assertEquals(iUA.UserName, iUA.Check_Send());
+    }
+
     @AfterClass
     public static void tearDown()
     {

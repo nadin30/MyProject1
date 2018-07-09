@@ -31,22 +31,74 @@ public class iUA {
     @FindBy(name = "pass")
     private WebElement PasswordField;
 
+    @FindBy(id = "to")
+    private WebElement To;
+
     @FindBy(className = "sn_menu_title")
     private WebElement UserNAme;
 
-    private WebElement LogButton;
+    @FindBy(name = "subject")
+    private WebElement SubjectField;
 
-    public String UserName = "futuretest@i.ua";
+    @FindBy(id = "text")
+    private WebElement TextLetter;
+
+    @FindBy(name = "send")
+    private WebElement Send_button;
+
+
+
+    private WebElement LogButton;
+    private WebElement CreateButton;
+    private WebElement Inbox;
+    private WebElement OpenLetter;
+    private WebElement FromWho;
+
+    public String UserName = "miroshka_n@i.ua";
+
+
 
     public void Login()
     {
         LogButton = driver.findElement(By.cssSelector("div.content.clear > form > p > input[type=\"submit\"]"));
         LoginField.sendKeys(this.UserName);
-        PasswordField.sendKeys("qwerty123456");
+        PasswordField.sendKeys("nadin123");
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         LogButton.click();
     }
+
+    public void Create_Mess() {
+        CreateButton = driver.findElement(By.cssSelector("div.Left > p > a"));
+        CreateButton.click();
+    }
+
+    public void EnterTo() {
+        To.sendKeys("miroshka_n@i.ua");
+        SubjectField.sendKeys("NewLetter");
+
+    }
+
+    public void EnterText() {
+
+        TextLetter.sendKeys("Hello!");
+        Send_button.click();
+
+    }
+
+    public String Check_Send() {
+        Inbox = driver.findElement(By.cssSelector("div.content.clear > ul > li.new > a"));
+        Inbox.click();
+        OpenLetter = driver.findElement(By.cssSelector("div:nth-child(20) > a > span.frm"));
+        OpenLetter.click();
+        FromWho = driver.findElement(By.cssSelector("div.from > div.field_value > a"));
+        return FromWho.getText();
+
+
+    }
+
+
+
 
     public String CheckUser() {
         return  UserNAme.getText();
